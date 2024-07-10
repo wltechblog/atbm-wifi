@@ -13,6 +13,7 @@ PWD:=$(shell pwd)
 WIFI_INSTALL_DIR := $(PWD)/driver_install
 
 export WIFI_PROJ_DIR=$(PWD)
+export
 #####################################################
 
 ifeq ($(CONFIG_ATBM_MODULE_DRIVER_NAME),)
