@@ -136,7 +136,7 @@ get_ver:
 
 modules:clean
 	@echo "arch=$(ARCH)"
-	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KDIR) M=$(shell pwd)  modules -j8
+	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KDIR) M=$(shell pwd)  modules -j$(nproc)
 #	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 strip:

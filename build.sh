@@ -29,10 +29,12 @@ if [[ -z "$CROSS_COMPILE_TOOLCHAIN" ]]; then
 fi
 
 # Run make command
-/usr/bin/make -j$(nproc) \
+make -j$(nproc) \
 -C "$KERNEL_DIR" \
 ARCH=mips \
 CROSS_COMPILE="$CROSS_COMPILE_TOOLCHAIN" \
 KDIR="$KERNEL_DIR" \
 PWD=$(pwd) \
 M=$(pwd)/. modules
+
+make install

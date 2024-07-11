@@ -41,7 +41,7 @@ get_ver:
 	@echo "**************************************"
 modules:clean
 	@echo "arch=$(ARCH)"
-	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KDIR) M=$(shell pwd)  modules -j8
+	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KDIR) M=$(shell pwd) modules -j$(nproc)
 #	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 strip:
@@ -52,7 +52,7 @@ menuconfig:
 	$(MAKE) -C atbm_kconf mconf -f Makefile
 	@atbm_kconf/mconf atbm_kconf/Kconfig
 
-install:modules
+install:
 	mkdir -p $(WIFI_INSTALL_DIR)
 	chmod 777 $(WIFI_INSTALL_DIR)
 	cp hal_apollo/*.ko         $(WIFI_INSTALL_DIR)
@@ -62,8 +62,8 @@ ble_demo:
 ifneq ($(BLEMODULE),)
 	mkdir -p $(WIFI_INSTALL_DIR)
 #	cp -f ble_host/tools/ble_smt_demo.c ble_smt_demo/
-	#$(MAKE) ble_demo -f ble_smt_demo/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j8
-	$(MAKE) tools_install -f ble_host/tools/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j8
+	#$(MAKE) ble_demo -f ble_smt_demo/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j$(nproc)
+	$(MAKE) tools_install -f ble_host/tools/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j$(nproc)
 	#cp -f ble_host/tools/ble_smt $(WIFI_INSTALL_DIR)
 	cp -f ble_host/tools/atbm_cli $(WIFI_INSTALL_DIR)
 	cp -f ble_host/tools/atbm_tool $(WIFI_INSTALL_DIR)
@@ -75,8 +75,8 @@ ble_stack:
 ifneq ($(CONFIG_ATBM_BLE_WIFI_PLATFORM),)
 	@echo "start ble host"
 	mkdir -p $(WIFI_INSTALL_DIR)
-	$(MAKE) ble_stack -f ble_host/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j8
-	$(MAKE) tools_install -f ble_host/tools/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j8
+	$(MAKE) ble_stack -f ble_host/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j$(nproc)
+	$(MAKE) tools_install -f ble_host/tools/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j$(nproc)
 	#cp -f ble_host/tools/ble_smt $(WIFI_INSTALL_DIR)
 	cp -f ble_host/tools/atbm_cli $(WIFI_INSTALL_DIR)
 	cp -f ble_host/tools/atbm_tool $(WIFI_INSTALL_DIR)
@@ -84,22 +84,22 @@ else
 ifneq ($(CONFIG_ATBM_ONLY_BLE_WIFI_PLATFORM),)
 	@echo "start ble host"
 	mkdir -p $(WIFI_INSTALL_DIR)
-	$(MAKE) ble_stack -f ble_host/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j8
-	$(MAKE) tools_install -f ble_host/tools/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j8
+	$(MAKE) ble_stack -f ble_host/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j$(nproc)
+	$(MAKE) tools_install -f ble_host/tools/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j$(nproc)
 	#cp -f ble_host/tools/ble_smt $(WIFI_INSTALL_DIR)
 	cp -f ble_host/tools/atbm_cli $(WIFI_INSTALL_DIR)
 	cp -f ble_host/tools/atbm_tool $(WIFI_INSTALL_DIR)
 endif
 endif
 ble_stack_clean:
-	$(MAKE) ble_stack_clean -f ble_host/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j8
+	$(MAKE) ble_stack_clean -f ble_host/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j$(nproc)
 
 
 ble_coex:
 	@echo "CONFIG_ATBM_BLE_ADV_COEXIST=$(CONFIG_ATBM_BLE_ADV_COEXIST)"
 ifneq ($(BLECOEXIST),)
 	mkdir -p $(WIFI_INSTALL_DIR)
-	$(MAKE) ble_coex -f ble_coexist_demo/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j8
+	$(MAKE) ble_coex -f ble_coexist_demo/Makefile  ARCH=$(ARCH)  CROSS_COMPILE=$(CROSS_COMPILE) KDIR=$(KERDIR) SYS=$(sys) PLAT=$(platform) -j$(nproc)
 	cp -f ble_coexist_demo/ble_coex $(WIFI_INSTALL_DIR)
 else
 	@echo "not open CONFIG_ATBM_BLE_ADV_COEXIST configure!"

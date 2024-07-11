@@ -21,7 +21,7 @@ tools_install:
 	cp $(TOOL_CLI_NAME) driver_install/
 	
 #power_install: power_clean
-#	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KDIR) M=$(shell pwd)/tools/ modules -j8
+#	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KDIR) M=$(shell pwd)/tools/ modules -j$(nproc)
 #	cp tools/*.ko driver_install/
 	
 #power_clean:
