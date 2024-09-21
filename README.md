@@ -6,6 +6,8 @@ This driver supports a range of chipsets in the 6xxx series.  Some Altobeam-base
 
 Below is a detailed list of the supported chipsets, including their dimensions, production dates, features, and current production status.
 
+ATBM6062 support may be found in the `atbm-606x` branch.
+
 ### ALTOBEAM:
 | chip        | size | release | status  | description                                                                              |
 |-------------|------|---------|---------|------------------------------------------------------------------------------------------|
@@ -20,6 +22,7 @@ Below is a detailed list of the supported chipsets, including their dimensions, 
 | ATBM6032-X  | 4x4  | Q2 2023 | Current | 1T1R, IEEE 802.11b/g/n, HT20/HT40, BLE, USB                                              |
 | ATBM6132    | 5x5  | Q4 2023 | Current | 1T1R, IEEE 802.11a/b/g/n, 2.4/5GHz dual band, HT20/HT40, BLE v5.0 Combo chip             |
 | ATBM6x41    | 6x6  | Q2 2021 | Current | 1T1R, IEEE 802.11b/g/n, low power iot Wi-Fi chip, embedded MCU, 2Mbit Flash              |
+| ATBM6062    | 4x4  | Q4 2023 | Current | 1T1R, IEEE 802.11a/b/g/n/ax, HT20/HT40, Wi-Fi 6 + BLE v5.0 Combo chip                    |
 
 ### SIGMASTAR:
 | chip        | size | release | status  | description                                                                              |
@@ -36,3 +39,4 @@ HARDWARE:
 | mercurius | atbm6132          |
 | comb      | wifi4_all_chip    |
 | hera      | atbm6x41          |
+| cronus    | atbm6062          |
