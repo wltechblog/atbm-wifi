@@ -1981,11 +1981,12 @@ void atbm_rx_cb(struct atbm_vif *priv,
 				da = frame->addr1;
 				bssid = frame->addr2;
 				sa = frame->addr3;
-				
+
 			}
 
 			if(memcmp(da,priv->vif->addr,6) != 0 && priv->join_status != ATBM_APOLLO_JOIN_STATUS_STA_LISTEN){
-				atbm_printk_err("recv dest addr:[%pM] , local addr:[%pM]\n",da,priv->vif->addr);
+				atbm_printk_err("[atbm_error]: Received frame with unexpected destination address: [%pM]. Local interface address: [%pM]. Dropping frame as it is not directed to this device.\n",
+					da, priv->vif->addr);
 				goto drop;
 			}
             rcu_read_lock();
