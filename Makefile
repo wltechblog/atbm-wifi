@@ -41,7 +41,7 @@ get_ver:
 	@echo "**************************************"
 modules:clean
 	@echo "arch=$(ARCH)"
-	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KDIR) M=$(shell pwd) modules -j$(nproc)
+	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KDIR) M=$(shell pwd) modules -j$(shell nproc))
 #	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 strip:
